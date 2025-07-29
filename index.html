@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compound Interest Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0e0e0e;
+      color: #f1f1f1;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #1c1c1c;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #00ffc8;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #ccc;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 6px;
+      background-color: #333;
+      color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #00ffc8;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00bfa5;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+      color: #00ffc8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Compound Interest Calculator</h2>
+
+    <label for="principal">Principal Amount (₹):</label>
+    <input type="number" id="principal" placeholder="Enter amount">
+
+    <label for="rate">Annual Interest Rate (%):</label>
+    <input type="number" id="rate" placeholder="e.g., 8">
+
+    <label for="years">Time Period (Years):</label>
+    <input type="number" id="years" placeholder="e.g., 3">
+
+    <label for="frequency">Compounded:</label>
+    <input type="number" id="frequency" placeholder="e.g., 12 (monthly)">
+
+    <button onclick="calculateCI()">Calculate</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateCI() {
+      const P = parseFloat(document.getElementById("principal").value);
+      const R = parseFloat(document.getElementById("rate").value);
+      const T = parseFloat(document.getElementById("years").value);
+      const N = parseFloat(document.getElementById("frequency").value);
+
+      if (isNaN(P) || isNaN(R) || isNaN(T) || isNaN(N)) {
+        document.getElementById("result").innerHTML = "Please fill all fields properly.";
+        return;
+      }
+
+      const A = P * Math.pow((1 + (R / (100 * N))), N * T);
+      const interest = A - P;
+
+      document.getElementById("result").innerHTML =
+        `Future Value: ₹${A.toFixed(2)}<br>Interest Earned: ₹${interest.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
